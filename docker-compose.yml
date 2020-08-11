@@ -1,0 +1,43 @@
+version: '3'
+
+services: 
+    rest:
+        container_name: rest_server
+        build:
+            context: ./gunicorn/
+            dockerfile: gunicorn.Dockerfile 
+
+        volumes: 
+            - ./gunicorn/django/:/var/www/html/
+
+        ports: 
+            - 8000:8000
+            - 9000:9000
+
+        networks: 
+            - website_stack
+        
+    database:
+        container_name: mariadb
+        build:
+            context: ./mariadb/
+            dockerfile: mariadb.Dockerfile
+
+        volumes: 
+            - rest_data:/var/lib/mysql/
+
+        networks: 
+            - website_stack
+
+        environment: 
+            #secrets section in docker-compose
+            MYSQL_ROOT_PASSWORD: djangopasswd
+            MYSQL_DATABASE: Django
+            MYSQL_USER: django
+            MYSQL_PASSWORD: djangousersqlroot
+
+volumes:
+    rest_data:
+
+networks: 
+    website_stack:
