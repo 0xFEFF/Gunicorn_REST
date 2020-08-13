@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from pc_shop.serializers import UserSerializer, GroupSerializer
+from pc_shop.serializers import UserSerializer, GroupSerializer, ProzessorSerializer
+from pc_shop.models import Prozessor
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -19,4 +20,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class ProzessorViewSet(viewsets.ModelViewSet):
+    queryset = Prozessor.objects.all()
+    serializer_class = ProzessorSerializer
     permission_classes = [permissions.IsAuthenticated]
