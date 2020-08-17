@@ -23,6 +23,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 class ProzessorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
     queryset = Prozessor.objects.all()
     serializer_class = ProzessorSerializer
     permission_classes = [permissions.IsAuthenticated]
