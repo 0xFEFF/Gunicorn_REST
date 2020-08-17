@@ -1,3 +1,4 @@
+gunicorn/django/rest/__pycache__
 gunicorn/django/rest/rest/__pycache__
-gunicorn/django/rest/pc_shop/__pycache__
 gunicorn/django/rest/pc_shop/migrations
+gunicorn/django/rest/pc_shop/__pycache__
