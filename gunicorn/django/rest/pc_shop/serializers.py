@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from pc_shop.models import Prozessor
+from pc_shop.models import Prozessor, Bestellung
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,4 +16,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProzessorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Prozessor
-        fields = ['Serie', 'Modell', 'Codename', 'Kerne', 'Threads', 'Prozessortakt', 'Turbotakt', 'Sockel', 'TDP']
+        fields = ['url', 'id', 'Serie', 'Modell', 'Kerne', 'Threads', 'Prozessortakt']
+        # 'Codename', 'Turbotakt', 'Sockel', 'TDP'
+
+class BestellungSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Bestellung
+        fields = ['BestellNummer', 'Prozessor', 'Anzahl']
