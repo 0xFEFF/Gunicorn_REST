@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Prozessor(models.Model):
+    Artikelnummer = models.CharField(primary_key=True, max_length=100)
     Serie = models.CharField(max_length=100)
     Modell = models.CharField(max_length=100)
     #Codename = models.CharField(max_length=100)
@@ -15,10 +16,20 @@ class Prozessor(models.Model):
     class Meta:
         ordering = ['Modell']
 
-class Bestellung(models.Model):
-    BestellNummer = models.CharField(max_length=100, primary_key=True)
-    Prozessor = models.ManyToManyField(Prozessor)
+class Bestellung_Produkt(models.Model):
+    Bestellnummer = models.ForeignKey('Bestellung', on_delete=models.CASCADE)
+    Artikelnummer = models.ForeignKey('Prozessor', on_delete=models.CASCADE)
     Anzahl = models.IntegerField()
+
+    class Meta:
+        ordering = ['Bestellnummer']
+
+class Bestellung(models.Model):
+    Bestellnummer = models.CharField(max_length=100, primary_key=True)
+    Datum = models.DateField(auto_now=True)
+
+    class Meta:
+        ordering = ['Bestellnummer']
 
 """    
 class RAM(models.Model):
