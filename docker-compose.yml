@@ -12,11 +12,22 @@ services:
 
         ports: 
             - 8000:8000
-            - 9000:9000
+            
+        networks: 
+            - website_stack
+    
+    proxy:
+        container_name: nginx_proxy
+        build: 
+            context: ./nginx/
+            dockerfile: nginx.Dockerfile
+        
+        ports: 
+            - 80:80
 
         networks: 
             - website_stack
-        
+
     database:
         container_name: mariadb
         build:

@@ -4,16 +4,21 @@ from django.db import models
 class Prozessor(models.Model):
     Serie = models.CharField(max_length=100)
     Modell = models.CharField(max_length=100)
-    Codename = models.CharField(max_length=100)
+    #Codename = models.CharField(max_length=100)
     Kerne = models.IntegerField()
     Threads = models.IntegerField()
     Prozessortakt = models.FloatField()
-    Turbotakt = models.FloatField()
-    Sockel = models.CharField(max_length=50)
-    TDP = models.CharField(max_length=10)
+    #Turbotakt = models.FloatField()
+    #Sockel = models.CharField(max_length=50)
+    #TDP = models.CharField(max_length=10)
 
     class Meta:
         ordering = ['Modell']
+
+class Bestellung(models.Model):
+    BestellNummer = models.CharField(max_length=100, primary_key=True)
+    Prozessor = models.ManyToManyField(Prozessor)
+    Anzahl = models.IntegerField()
 
 """    
 class RAM(models.Model):
